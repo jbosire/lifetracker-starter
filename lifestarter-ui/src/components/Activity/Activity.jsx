@@ -7,7 +7,7 @@ export default function Activity() {
    
   return (
     <div className="Activity">
-     <Navbar />
+     
     </div>
   );
 }

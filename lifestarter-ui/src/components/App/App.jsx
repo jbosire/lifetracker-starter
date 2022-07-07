@@ -14,10 +14,13 @@ import Register from "../Register/Register"
 import axios from "axios";
 
 export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
   return (
     <div className="app">
+      
       <BrowserRouter>
         <main>
+        <Navbar isLoggedIn={isLoggedIn}/>
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/activity" element={<Activity />} />

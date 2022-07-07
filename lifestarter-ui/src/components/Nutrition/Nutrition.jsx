@@ -7,7 +7,7 @@ export default function Nutrition() {
    
   return (
     <div className="Nutrition">
-     <Navbar />
+   
     </div>
   );
 }

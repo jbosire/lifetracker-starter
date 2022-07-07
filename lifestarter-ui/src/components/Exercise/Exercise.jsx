@@ -7,7 +7,7 @@ export default function Exercise() {
    
   return (
     <div className="Exercise">
-     <Navbar />
+   
     </div>
   );
 }

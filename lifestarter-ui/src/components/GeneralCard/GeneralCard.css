@@ -1,0 +1,70 @@
+.GeneralCard{
+    width: 360px;
+    height: 220px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    padding: 16px 32px;
+    background: rgb(57, 160, 160);
+    margin-left: 20px;
+   
+}
+
+.GeneralCard .card-header{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.GeneralCard .card-header h2{
+    color: wheat;
+
+}
+
+.GeneralCard .card-header img{
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    margin-right: 10px;
+
+}
+
+.GeneralCard .card-stats{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.GeneralCard .CardStat{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.GeneralCard .CardStat p{
+    color: white;
+    font-weight: 400;
+    font-size: 22px;
+}
+
+.GeneralCard .CardStat span{
+    color: white;
+    font-weight: 400;
+    font-size: 40px;
+}
+
+.GeneralCard .card-meta{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.GeneralCard .card-meta small.category{
+    color: white;
+    border: 1px solid white;
+    border-radius: 8px;
+    padding: 8px 12px;
+}

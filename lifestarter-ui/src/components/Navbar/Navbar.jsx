@@ -4,6 +4,11 @@ import { Link } from "react-router-dom";
 import "./Navbar.css";
 
 export default function Navbar(props) {
+  const handleOnClick = () =>{
+    if(props.isLoggedIn){
+      props.setIsLoggedIn(false)
+    }
+  }
   return (
     <nav className="navbar">
       <Logo className="logo" />
@@ -30,13 +35,13 @@ export default function Navbar(props) {
         </li>
         {props.isLoggedIn ? (
            <Link to="/register">
-           <li className="secondary btn">        
-             <span> Sign Up</span>     
+           <li className="secondary btn" onClick={handleOnClick}>        
+             <span> Sign out</span>     
            </li>
            </Link>
         ) : (
             <Link to="/register">
-          <li className="secondary btn">        
+          <li className="secondary btn"  onClick={handleOnClick}>        
             <span> Sign Up</span>     
           </li>
           </Link>

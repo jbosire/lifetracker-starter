@@ -18,15 +18,15 @@ export default function App() {
       
       <BrowserRouter>
         <main>
-        <Navbar isLoggedIn={isLoggedIn}/>
+        <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/activity" element={<Activity/>} />
             <Route path="/exercise" element={<GeneralPage pageType="Exercise" />} />
             <Route path="/nutrition" element={<GeneralPage pageType="Nutrition" />} />
             <Route path="/sleep" element={<GeneralPage pageType="Sleep" />} />
-            <Route path="/login" element={<Login/>} />
-            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login  isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>} />
+            <Route path="/register" element={<Register isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>} />
 
             <Route path="*" element={<NotFound />} />
           </Routes>

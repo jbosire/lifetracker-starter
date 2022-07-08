@@ -24,6 +24,14 @@ class User{
                 throw new BadRequestError(`Missing ${field} in request body.`)
             }
         })
+        if(credentials.email.indexOf("@") <= 0){
+            throw new BadRequestError("Invalid email.");
+        }
+
+        if(credentials.password.length < 1){
+            throw new BadRequestError("Please input password");
+
+        }
 
         const user = await User.fetchUserByEmail(credentials.email)
 
@@ -52,15 +60,20 @@ class User{
             throw new BadRequestError("Invalid email.");
         }
 
+        if(credentials.password.length < 1){
+            throw new BadRequestError("Please input password");
+
+        }
+
 
         const existingUser = await User.fetchUserByEmail(credentials.email)
         if(existingUser){
-            throw new BadRequestError(`Duplicate email: ${credentials.email}`)
+            throw new BadRequestError(`Email already exists: ${credentials.email}`)
         }
 
         const existingUsername = await User.checkUsername(credentials.username)
         if(existingUsername){
-            throw new BadRequestError(`Duplicate username: ${credentials.username}`)
+            throw new BadRequestError(`Username already exists: ${credentials.username}`)
 
         }
 
@@ -77,7 +90,7 @@ class User{
             password
         )
         VALUES ($1,$2,$3,$4,$5)
-        RETURNING id,firstName,lastName,email,username,password;
+        RETURNING id,firstName,lastName,email,username;
         `, [credentials.firstName,credentials.lastName,lowercasedEmail,credentials.username, hashedPassword]
 
         )

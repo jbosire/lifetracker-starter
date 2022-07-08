@@ -13,7 +13,15 @@ router.get("/", async (req, res, next) => {
 
 router.post("/create", async (req, res, next) => {
   try {
-  } catch (err) {}
+    const sleeps = req.body;
+
+
+    const data = await Sleep.postSleep(sleeps);
+
+    res.status(201).json({ sleep: data });
+  } catch (err) {
+    next(err)
+  }
 });
 
 module.exports = router;

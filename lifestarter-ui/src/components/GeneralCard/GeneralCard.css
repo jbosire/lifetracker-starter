@@ -19,7 +19,7 @@
 }
 
 .GeneralCard .card-header h2{
-    color: wheat;
+    color: white;
 
 }
 
@@ -67,4 +67,20 @@
     border: 1px solid white;
     border-radius: 8px;
     padding: 8px 12px;
+}
+
+.GeneralCard .card-meta small{
+    color: whitesmoke;
+}
+
+.GeneralCard.Sleep{
+    background: teal;
+}
+
+.GeneralCard.Nutrition{
+    background: rgb(45, 41, 33);
+}
+
+.GeneralCard.Exercise{
+    background: rgb(105, 3, 20);
 }

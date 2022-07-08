@@ -1,7 +1,7 @@
 import * as React from "react";
-import GeneralCard from "../GeneralCard/GeneralCard"
+import GeneralCard from "../GeneralCard/GeneralCard";
+import GeneralForm from "../GeneralForm/GeneralForm";
 import "./GeneralPage.css";
-import { useState, useEffect } from "react";
 
 export default function GeneralPage(props) {
   return (
@@ -19,16 +19,9 @@ export default function GeneralPage(props) {
             </button>
           </div>
           <div className="feed">
-            <GeneralCard />
-            <GeneralCard />
-            <GeneralCard />
-            <GeneralCard />
-            <GeneralCard />
-
-            
-            {/* <div className="empty">
+            <div className="empty">
               <h2>Nothing here yet.</h2>
-            </div> */}
+            </div>
           </div>
         </div>
       </div>

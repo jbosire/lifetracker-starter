@@ -2,7 +2,6 @@ import * as React from "react";
 import Logo from "../Logo/Logo";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
-//import { SocialIcon } from "react-social-icons";
 
 export default function Navbar(props) {
   return (

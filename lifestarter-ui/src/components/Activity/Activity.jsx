@@ -1,6 +1,5 @@
 import * as React from "react";
 import "./Activity.css";
-import { useState, useEffect } from "react";
 
 export default function Activity() {
   return (

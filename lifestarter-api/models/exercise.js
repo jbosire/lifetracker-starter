@@ -1,10 +1,50 @@
-const db = require("../db")
-const {BCRYPT_WORK_FACTOR} = require("../config")
+const db = require("../db");
+const { BadRequestError } = require("../utils/errors");
 
-class Exercise{
+class Exercise {
+  static async getExercise() {
+    const query = `SELECT * 
+                       FROM exercise 
+                       JOIN users ON users.id = exercise.user_id`;
+    const result = await db.query(query);
+    const exercise = result.rows;
+    console.log(exercise);
+    return exercise;
+  }
 
+  static async postExercise(exercise) {
+    if (exercise.exercise.length === 0) {
+      throw new BadRequestError("No exercise name provided");
+    }
+
+    if (exercise.category.length === 0) {
+      throw new BadRequestError("No exercise category provided");
+    }
+
+    const result = await db.query(
+      `
+        INSERT INTO exercise(
+            exercise,
+            category,
+            duration,
+            intensity,
+            user_id
+        )
+        VALUES ($1,$2,$3,$4,$5)
+        RETURNING user_id,exercise,category,duration,intensity;
+        `,
+      [
+        exercise.exercise,
+        exercise.category,
+        exercise.duration,
+        exercise.intensity,
+        exercise.user_id,
+      ]
+    );
+
+    const res = result.rows[0];
+    return res;
+  }
 }
 
-
-
-module.exports = Exercise
+module.exports = Exercise;

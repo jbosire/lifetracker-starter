@@ -3,6 +3,9 @@ const cors = require("cors")
 const morgan = require("morgan")
 const {PORT} = require("./config")
 const authRoutes = require("./routes/auth")
+const sleepRoutes = require("./routes/sleep")
+const nutritionRoutes = require("./routes/nutrition")
+const exerciseRoutes = require("./routes/exercise")
 
 const {BadRequestError, NotFoundError} = require("./utils/errors")
 
@@ -15,6 +18,9 @@ app.use(express.json())
 app.use(morgan("tiny"))
 
 app.use("/auth", authRoutes)
+app.use("/nutrition", nutritionRoutes)
+app.use("/sleep", sleepRoutes)
+app.use("/exercise", exerciseRoutes)
 
 app.use((req,res,next) =>{
     return next(new NotFoundError())

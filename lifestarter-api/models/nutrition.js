@@ -9,7 +9,7 @@ class Nutrition {
                        JOIN users ON users.id = nutrition.user_id`;
     const result = await db.query(query);
     const nutrition = result.rows;
-    console.log(nutrition);
+  
     return nutrition;
   }
 
@@ -20,6 +20,20 @@ class Nutrition {
 
     if (nutrition.category.length === 0) {
       throw new BadRequestError("No nutrition category provided");
+    }
+
+    if (nutrition.imageUrl.length === 0) {
+      throw new BadRequestError("Must provide imageUrl");
+    }
+
+    if (nutrition.quantity === 0){
+      throw new BadRequestError("Nutrition quantity cannot be zero");
+
+    }
+
+    if (nutrition.calories === 0){
+      throw new BadRequestError("Nutrition calories cannot be zero");
+      
     }
 
     const result = await db.query(

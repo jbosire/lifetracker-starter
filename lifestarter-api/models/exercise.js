@@ -8,7 +8,7 @@ class Exercise {
                        JOIN users ON users.id = exercise.user_id`;
     const result = await db.query(query);
     const exercise = result.rows;
-    console.log(exercise);
+   
     return exercise;
   }
 
@@ -19,6 +19,14 @@ class Exercise {
 
     if (exercise.category.length === 0) {
       throw new BadRequestError("No exercise category provided");
+    }
+
+    if (exercise.duration === 0) {
+      throw new BadRequestError("Exercise duration cannot be zero");
+    }
+
+    if (exercise.intensity === 0) {
+      throw new BadRequestError("Exercise intensity cannot be zero");
     }
 
     const result = await db.query(

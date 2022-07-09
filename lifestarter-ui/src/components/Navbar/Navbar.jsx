@@ -18,16 +18,16 @@ export default function Navbar(props) {
           <Link to="/"> Home </Link>
         </li>
         <li>
-          <Link to="/activity"> Activity </Link>
+          <Link to={props.isLoggedIn ? "/activity" : "/login"}> Activity </Link>
         </li>
         <li>
-          <Link to="/exercise"> Exercise </Link>
+          <Link to={props.isLoggedIn ? "/exercise" : "/login"}> Exercise </Link>
         </li>
         <li>
-          <Link to="/nutrition"> Nutrition </Link>
+          <Link to={props.isLoggedIn ? "/nutrition" : "/login"}> Nutrition </Link>
         </li>
         <li>
-          <Link to="/sleep">Sleep</Link>
+          <Link to={props.isLoggedIn ? "/sleep" : "/login"}>Sleep</Link>
         </li>
         
         <li className={props.isLoggedIn ? "login close" : "login"}>

@@ -50,7 +50,10 @@ export default function Login(props) {
         email: form.email,
       })
       if (res?.data) {
-      //  setAppState(res.data)
+     
+       props.setSessionId(res.data.user.id)
+       
+      
         setIsLoading(false)
         props.setIsLoggedIn(true)
         navigate("/activity")
@@ -65,7 +68,7 @@ export default function Login(props) {
       setIsLoading(false)
     }
   }
-    
+  
   return (
     <div className="Login">
       <div className="card">

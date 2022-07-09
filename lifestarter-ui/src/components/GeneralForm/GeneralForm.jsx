@@ -12,13 +12,13 @@ export default function GeneralForm(props) {
     quantity: 0,
     calories: 0,
     imageUrl: "",
-    user_id: 1,
+    user_id: 13,
   };
 
   const sleepForm = {
     startTime: "",
     endTime: "",
-    user_id: 1,
+    user_id: 13,
   };
 
   const exerciseForm = {
@@ -26,7 +26,7 @@ export default function GeneralForm(props) {
     category: "",
     duration: 0,
     intensity: 0,
-    user_id: 1,
+    user_id: 13,
   };
 
   const [success,setSuccess] = useState(false)

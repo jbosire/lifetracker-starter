@@ -12,39 +12,50 @@ import Register from "../Register/Register";
 import GeneralForm from "../GeneralForm/GeneralForm";
 import axios from "axios";
 
-
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [sessionId, setSessionId] = useState(null);
-  
 
-
-  
-
-  
-
+ 
 
   return (
     <div className="app">
       <BrowserRouter>
         <main>
-          <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+          <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setSessionId={setSessionId} sessionId={sessionId}/>
           <Routes>
             <Route path="/" element={<LandingPage />} />
-            <Route path="/activity" element={<Activity setSessionId={setSessionId} sessionId={sessionId}/>} />
+            <Route
+              path="/activity"
+              element={
+                <Activity setSessionId={setSessionId} sessionId={sessionId} />
+              }
+            />
             <Route
               path="/exercise"
-              element={<GeneralPage pageType="Exercise" sessionId={sessionId}/>}
+              element={
+                <GeneralPage pageType="Exercise" sessionId={sessionId} />
+              }
             />
             <Route
               path="/nutrition"
-              element={<GeneralPage pageType="Nutrition" sessionId={sessionId}/>}
+              element={
+                <GeneralPage pageType="Nutrition" sessionId={sessionId} />
+              }
             />
-            <Route path="/sleep" element={<GeneralPage pageType="Sleep" sessionId={sessionId}/>} />
+            <Route
+              path="/sleep"
+              element={<GeneralPage pageType="Sleep" sessionId={sessionId} />}
+            />
             <Route
               path="/login"
               element={
-                <Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+                <Login
+                  isLoggedIn={isLoggedIn}
+                  setIsLoggedIn={setIsLoggedIn}
+                  setSessionId={setSessionId}
+                  sessionId={sessionId}
+                />
               }
             />
             <Route
@@ -53,20 +64,26 @@ export default function App() {
                 <Register
                   isLoggedIn={isLoggedIn}
                   setIsLoggedIn={setIsLoggedIn}
+                  setSessionId={setSessionId}
+                  sessionId={sessionId}
                 />
               }
             />
             <Route
               path="/sleep/create"
-              element={<GeneralForm formType="Sleep" sessionId={sessionId}/>}
+              element={<GeneralForm formType="Sleep" sessionId={sessionId} />}
             />
             <Route
               path="/nutrition/create"
-              element={<GeneralForm formType="Nutrition" sessionId={sessionId}/>}
+              element={
+                <GeneralForm formType="Nutrition" sessionId={sessionId} />
+              }
             />
             <Route
               path="/exercise/create"
-              element={<GeneralForm formType="Exercise" sessionId={sessionId}/>}
+              element={
+                <GeneralForm formType="Exercise" sessionId={sessionId} />
+              }
             />
 
             <Route path="*" element={<NotFound />} />

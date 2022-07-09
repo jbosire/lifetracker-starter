@@ -99,7 +99,9 @@ export default function Register(props) {
       });
 
       if (res?.data?.user) {
-        //   setAppState(res.data);
+        
+        
+        props.setSessionId(res.data.user.id)
         props.setIsLoggedIn(true)
         navigate("/activity");
         setIsLoading(false);
@@ -120,6 +122,8 @@ export default function Register(props) {
       setIsLoading(false);
     }
   };
+
+  
 
   return (
     <div className="Register">

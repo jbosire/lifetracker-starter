@@ -19,6 +19,7 @@ CREATE TABLE sleep(
 
 CREATE TABLE nutrition(
     id              SERIAL PRIMARY KEY,
+    createdAt       TIMESTAMP NOT NULL DEFAULT NOW(),
     nutrient TEXT NOT NULL,
     category TEXT NOT NULL,
     quantity INTEGER NOT NULL,
@@ -31,6 +32,7 @@ CREATE TABLE nutrition(
 
 CREATE TABLE exercise(
     id          SERIAL PRIMARY KEY,
+    createdAt       TIMESTAMP NOT NULL DEFAULT NOW(),
     exercise TEXT NOT NULL,
     category TEXT NOT NULL,
     duration INTEGER NOT NULL,

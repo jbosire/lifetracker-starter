@@ -71,6 +71,10 @@
 
 .GeneralCard .card-meta small{
     color: whitesmoke;
+    font-size: 20px;
+    border: 1px solid wheat;
+    border-radius: 4px;
+    padding: 2px 2px;
 }
 
 .GeneralCard.Sleep{

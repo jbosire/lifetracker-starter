@@ -11,6 +11,15 @@ router.get("/sleep", async (req, res, next) => {
   }
 });
 
+router.get("/exercise", async (req, res, next) => {
+  try {
+    const exercisetotals = await Activity.getTotalExercise();
+    res.status(200).json({ exercisetotals: exercisetotals });
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.post("/create", async (req, res, next) => {
   try {
     const exercises = req.body;

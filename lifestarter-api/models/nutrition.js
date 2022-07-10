@@ -13,15 +13,28 @@ class Nutrition {
     return nutrition;
   }
 
+  static async getNutrientById(id) {
+    const query = `SELECT * 
+                       FROM nutrition 
+                       JOIN users ON users.id = nutrition.user_id`;
+    const result = await db.query(query);
+    const nutrition = result.rows;
+  
+    return nutrition;
+  }
+
   static async getNutritionById(id) {
     const nutritions = await this.getNutrition();
 
     const nutritionItems = nutritions.filter((datum) => {
+      console.log(datum.id)
+      console.log(datum.user_id)
       return datum.id === id;
     });
 
     return nutritionItems;
   }
+
   static async postNutrition(nutrition) {
     if (nutrition.nutrient.length === 0) {
       throw new BadRequestError("No nutrient name provided");

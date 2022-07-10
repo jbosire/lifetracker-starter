@@ -18,8 +18,8 @@ export default function App() {
   const [nutrition, setNutrition] = useState([]);
   const [sleep, setSleep] = useState([]);
   const [exercise, setExercise] = useState([]);
-  const [name, setName] = useState("joram")
-
+  const [name, setName] = useState("joram");
+  console.log("testing one two");
   return (
     <div className="app">
       <BrowserRouter>
@@ -36,9 +36,9 @@ export default function App() {
               path="/activity"
               element={
                 <GeneralPage
-                name={name}
-                setName = {setName}
-                pageType="Activity"
+                  name={name}
+                  setName={setName}
+                  pageType="Activity"
                   setSessionId={setSessionId}
                   sessionId={sessionId}
                   nutrition={nutrition}

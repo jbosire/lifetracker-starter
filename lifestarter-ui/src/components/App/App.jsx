@@ -18,8 +18,8 @@ export default function App() {
   const [nutrition, setNutrition] = useState([]);
   const [sleep, setSleep] = useState([]);
   const [exercise, setExercise] = useState([]);
-  const [name, setName] = useState("joram");
-  console.log("testing one two");
+  const [name, setName] = useState("");
+  
   return (
     <div className="app">
       <BrowserRouter>

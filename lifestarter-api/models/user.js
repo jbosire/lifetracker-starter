@@ -7,8 +7,8 @@ class User{
     static async makePublicUser(user){
         return{
             id: user.id,
-            firstName: user.firstName,
-            lastName: user.lastName,
+            firstName: user.firstname,
+            lastName: user.lastname,
             email: user.email,
             username: user.username
            
@@ -34,11 +34,12 @@ class User{
         }
 
         const user = await User.fetchUserByEmail(credentials.email)
+       // console.log(user)
 
         if(user){
             const isValid = await bcrypt.compare(credentials.password, user.password);
             if(isValid){
-                return User.makePublicUser(user)
+                return this.makePublicUser(user)
             }
         }
 
@@ -109,6 +110,7 @@ class User{
         const query = `SELECT * FROM users WHERE email = $1`
         const result = await db.query(query, [email.toLowerCase()])
         const user = result.rows[0]
+        console.log("from fetch" + user)
         return user
     }
 

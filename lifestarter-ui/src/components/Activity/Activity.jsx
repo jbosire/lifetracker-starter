@@ -1,7 +1,7 @@
 import * as React from "react";
 import "./Activity.css";
 
-export default function Activity() {
+export default function Activity(props) {
   return (
     <div className="Activity">
       <div className="Banner">

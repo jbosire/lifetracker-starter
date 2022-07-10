@@ -15,37 +15,85 @@ import axios from "axios";
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [sessionId, setSessionId] = useState(null);
-
- 
+  const [nutrition, setNutrition] = useState([]);
+  const [sleep, setSleep] = useState([]);
+  const [exercise, setExercise] = useState([]);
+  const [name, setName] = useState("joram")
 
   return (
     <div className="app">
       <BrowserRouter>
         <main>
-          <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setSessionId={setSessionId} sessionId={sessionId}/>
+          <Navbar
+            isLoggedIn={isLoggedIn}
+            setIsLoggedIn={setIsLoggedIn}
+            setSessionId={setSessionId}
+            sessionId={sessionId}
+          />
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route
               path="/activity"
               element={
-                <Activity setSessionId={setSessionId} sessionId={sessionId} />
+                <GeneralPage
+                name={name}
+                setName = {setName}
+                pageType="Activity"
+                  setSessionId={setSessionId}
+                  sessionId={sessionId}
+                  nutrition={nutrition}
+                  setNutrition={setNutrition}
+                  sleep={sleep}
+                  setSleep={setSleep}
+                  exercise={exercise}
+                  setExercise={setExercise}
+                />
               }
             />
             <Route
               path="/exercise"
               element={
-                <GeneralPage pageType="Exercise" sessionId={sessionId} />
+                <GeneralPage
+                  pageType="Exercise"
+                  sessionId={sessionId}
+                  nutrition={nutrition}
+                  setNutrition={setNutrition}
+                  sleep={sleep}
+                  setSleep={setSleep}
+                  exercise={exercise}
+                  setExercise={setExercise}
+                />
               }
             />
             <Route
               path="/nutrition"
               element={
-                <GeneralPage pageType="Nutrition" sessionId={sessionId} />
+                <GeneralPage
+                  pageType="Nutrition"
+                  sessionId={sessionId}
+                  nutrition={nutrition}
+                  setNutrition={setNutrition}
+                  sleep={sleep}
+                  setSleep={setSleep}
+                  exercise={exercise}
+                  setExercise={setExercise}
+                />
               }
             />
             <Route
               path="/sleep"
-              element={<GeneralPage pageType="Sleep" sessionId={sessionId} />}
+              element={
+                <GeneralPage
+                  pageType="Sleep"
+                  sessionId={sessionId}
+                  nutrition={nutrition}
+                  setNutrition={setNutrition}
+                  sleep={sleep}
+                  setSleep={setSleep}
+                  exercise={exercise}
+                  setExercise={setExercise}
+                />
+              }
             />
             <Route
               path="/login"
@@ -55,6 +103,8 @@ export default function App() {
                   setIsLoggedIn={setIsLoggedIn}
                   setSessionId={setSessionId}
                   sessionId={sessionId}
+                  name={name}
+                  setName={setName}
                 />
               }
             />
@@ -66,6 +116,8 @@ export default function App() {
                   setIsLoggedIn={setIsLoggedIn}
                   setSessionId={setSessionId}
                   sessionId={sessionId}
+                  name={name}
+                  setName={setName}
                 />
               }
             />

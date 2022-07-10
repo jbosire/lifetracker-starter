@@ -52,6 +52,8 @@ export default function Login(props) {
       if (res?.data) {
      
        props.setSessionId(res.data.user.id)
+       props.setName(res.data.user.firstName)
+       console.log(res.data.user)
        
       
         setIsLoading(false)

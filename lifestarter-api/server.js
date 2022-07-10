@@ -6,6 +6,7 @@ const authRoutes = require("./routes/auth")
 const sleepRoutes = require("./routes/sleep")
 const nutritionRoutes = require("./routes/nutrition")
 const exerciseRoutes = require("./routes/exercise")
+const activityRoutes = require("./routes/activity")
 
 const {BadRequestError, NotFoundError} = require("./utils/errors")
 
@@ -21,6 +22,7 @@ app.use("/auth", authRoutes)
 app.use("/nutrition", nutritionRoutes)
 app.use("/sleep", sleepRoutes)
 app.use("/exercise", exerciseRoutes)
+app.use("/activity", activityRoutes)
 
 app.use((req,res,next) =>{
     return next(new NotFoundError())

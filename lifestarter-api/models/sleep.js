@@ -12,6 +12,17 @@ class Sleep {
   }
 
 
+  static async getSleepById(id) {
+    const sleeps = await this.getSleep();
+
+    const sleepItems = sleeps.filter((datum) => {
+      return datum.id === id;
+    });
+
+    return sleepItems;
+  }
+
+
   static async postSleep(sleep) {
     if (sleep.startTime.length === 0) {
       throw new BadRequestError("No start time provided");

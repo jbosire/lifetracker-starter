@@ -13,6 +13,15 @@ class Nutrition {
     return nutrition;
   }
 
+  static async getNutritionById(id) {
+    const nutritions = await this.getNutrition();
+
+    const nutritionItems = nutritions.filter((datum) => {
+      return datum.id === id;
+    });
+
+    return nutritionItems;
+  }
   static async postNutrition(nutrition) {
     if (nutrition.nutrient.length === 0) {
       throw new BadRequestError("No nutrient name provided");

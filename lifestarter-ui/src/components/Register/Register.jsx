@@ -102,6 +102,8 @@ export default function Register(props) {
         
         
         props.setSessionId(res.data.user.id)
+        props.setName(res.data.user.firstName)
+        console.log(res.data.user)
         props.setIsLoggedIn(true)
         navigate("/activity");
         setIsLoading(false);

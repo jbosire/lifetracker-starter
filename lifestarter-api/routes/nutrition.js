@@ -24,4 +24,14 @@ router.post("/create", async (req, res, next) => {
   }
 });
 
+router.get("/:user_id", async (req, res, next) => {
+  const user_id = Number(req.params.user_id);
+  
+
+  const nutritions = await Nutrition.getNutritionById(user_id)
+  
+
+  res.status(200).json({ nutrition: nutritions });
+});
+
 module.exports = router;

@@ -8,8 +8,18 @@ class Exercise {
                        JOIN users ON users.id = exercise.user_id`;
     const result = await db.query(query);
     const exercise = result.rows;
-   
+
     return exercise;
+  }
+
+  static async getExercisesById(id) {
+    const exercises = await this.getExercise();
+
+    const exerciseItems = exercises.filter((datum) => {
+      return datum.id === id;
+    });
+
+    return exerciseItems;
   }
 
   static async postExercise(exercise) {

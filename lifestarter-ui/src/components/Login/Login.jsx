@@ -58,6 +58,7 @@ export default function Login(props) {
       
         setIsLoading(false)
         props.setIsLoggedIn(true)
+        props.setIsClicked(false)
         navigate("/activity")
       } else {
         setErrors((e) => ({ ...e, form: "Invalid username/password combination" }))
@@ -74,6 +75,8 @@ export default function Login(props) {
   return (
     <div className="Login">
       <div className="card">
+        {!props.isLoggedIn && props.isClicked ? <h1 className="logError">Must be logged in to view this page</h1> : null}
+        
         <h2>Login</h2>
         <br/>
         <div className="form">

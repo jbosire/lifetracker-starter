@@ -5,7 +5,7 @@ import NotFound from "../NotFound/NotFound";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Activity from "../Activity/Activity";
+
 import GeneralPage from "../GeneralPage/GeneralPage";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
@@ -19,6 +19,9 @@ export default function App() {
   const [sleep, setSleep] = useState([]);
   const [exercise, setExercise] = useState([]);
   const [name, setName] = useState("");
+  const [isClicked, setIsClicked] = useState(false);
+
+  
   
   return (
     <div className="app">
@@ -29,6 +32,7 @@ export default function App() {
             setIsLoggedIn={setIsLoggedIn}
             setSessionId={setSessionId}
             sessionId={sessionId}
+            setIsClicked= {setIsClicked}
           />
           <Routes>
             <Route path="/" element={<LandingPage />} />
@@ -36,6 +40,7 @@ export default function App() {
               path="/activity"
               element={
                 <GeneralPage
+                isClicked={isClicked}
                   name={name}
                   setName={setName}
                   pageType="Activity"
@@ -54,6 +59,7 @@ export default function App() {
               path="/exercise"
               element={
                 <GeneralPage
+
                   pageType="Exercise"
                   sessionId={sessionId}
                   nutrition={nutrition}
@@ -99,6 +105,8 @@ export default function App() {
               path="/login"
               element={
                 <Login
+                isClicked={isClicked}
+                setIsClicked= {setIsClicked}
                   isLoggedIn={isLoggedIn}
                   setIsLoggedIn={setIsLoggedIn}
                   setSessionId={setSessionId}
@@ -112,6 +120,7 @@ export default function App() {
               path="/register"
               element={
                 <Register
+                setIsClicked= {setIsClicked}
                   isLoggedIn={isLoggedIn}
                   setIsLoggedIn={setIsLoggedIn}
                   setSessionId={setSessionId}

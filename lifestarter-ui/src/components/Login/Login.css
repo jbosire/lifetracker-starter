@@ -100,6 +100,14 @@
 
 }
 
+.card .logError{
+    color: red;
+    font-family: fantasy;
+    font-style: italic;
+    
+
+}
+
 .Login .card .error {
     background: #fe5421;
     background: rgba(245, 41, 41, 0.1);

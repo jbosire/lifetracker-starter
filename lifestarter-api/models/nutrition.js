@@ -27,8 +27,7 @@ class Nutrition {
     const nutritions = await this.getNutrition();
 
     const nutritionItems = nutritions.filter((datum) => {
-      console.log(datum.id)
-      console.log(datum.user_id)
+      
       return datum.id === id;
     });
 

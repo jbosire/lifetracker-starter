@@ -9,6 +9,12 @@ export default function Navbar(props) {
       props.setIsLoggedIn(false)
     }
   }
+
+  const handleLoggedClick = () =>{
+    if(!props.isLoggedIn){
+      props.setIsClicked(true)
+    }
+  }
   return (
     <nav className="navbar">
       <Logo className="logo" />
@@ -17,16 +23,16 @@ export default function Navbar(props) {
         <li>
           <Link to="/"> Home </Link>
         </li>
-        <li>
+        <li  onClick={handleLoggedClick}>
           <Link to={props.isLoggedIn ? "/activity" : "/login"}> Activity </Link>
         </li>
-        <li>
+        <li onClick={handleLoggedClick}>
           <Link to={props.isLoggedIn ? "/exercise" : "/login"}> Exercise </Link>
         </li>
-        <li>
+        <li onClick={handleLoggedClick}>
           <Link to={props.isLoggedIn ? "/nutrition" : "/login"}> Nutrition </Link>
         </li>
-        <li>
+        <li onClick={handleLoggedClick}>
           <Link to={props.isLoggedIn ? "/sleep" : "/login"}>Sleep</Link>
         </li>
         

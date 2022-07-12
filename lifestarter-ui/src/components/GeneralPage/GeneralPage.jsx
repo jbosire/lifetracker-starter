@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 
 export default function GeneralPage(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
 
   const emptyPage = (
     <div className="empty">

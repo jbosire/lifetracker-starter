@@ -2,14 +2,7 @@ const db = require("../db");
 const { BadRequestError } = require("../utils/errors");
 
 class Sleep {
-  static async getSleep() {
-     const query = `SELECT * 
-                    FROM sleep 
-                    JOIN users ON users.id = sleep.user_id`;
-     const result = await db.query(query);
-     const sleep = result.rows;
-    return sleep;
-  }
+  
 
 
   static async listSleepForUser(user){
@@ -27,15 +20,6 @@ class Sleep {
   }
 
 
-  static async getSleepById(id) {
-    const sleeps = await this.getSleep();
-
-    const sleepItems = sleeps.filter((datum) => {
-      return datum.id === id;
-    });
-
-    return sleepItems;
-  }
 
 
   static async postSleep({sleeps,user}) {

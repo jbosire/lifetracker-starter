@@ -2,15 +2,7 @@ const db = require("../db");
 const { BadRequestError } = require("../utils/errors");
 
 class Exercise {
-  static async getExercise() {
-    const query = `SELECT * 
-                       FROM exercise 
-                       JOIN users ON users.id = exercise.user_id`;
-    const result = await db.query(query);
-    const exercise = result.rows;
-
-    return exercise;
-  }
+  
 
   
 
@@ -28,15 +20,7 @@ class Exercise {
 
   }
 
-  static async getExercisesById(id) {
-    const exercises = await this.getExercise();
-
-    const exerciseItems = exercises.filter((datum) => {
-      return datum.id === id;
-    });
-
-    return exerciseItems;
-  }
+  
 
   static async postExercise({exercises, user}) {
     if (exercises.exercise.length === 0) {

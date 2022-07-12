@@ -48,9 +48,9 @@ export default function Login(props) {
       setErrors((e) => ({ ...e, form: error }));
       
     }
-    console.log(data)
+   
     if (data?.user) {
-      props.setSessionId(data.user.id);
+     
       props.setName(data.user.firstName);
      
 

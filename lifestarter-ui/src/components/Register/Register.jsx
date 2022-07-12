@@ -102,7 +102,7 @@ export default function Register(props) {
       setIsLoading(false);
     }
     if (data?.user) {
-      props.setSessionId(data.user.id);
+     
       props.setName(data.user.firstName);
   
       props.setIsLoggedIn(true);

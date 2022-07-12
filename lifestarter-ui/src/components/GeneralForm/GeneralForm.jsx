@@ -12,13 +12,13 @@ export default function GeneralForm(props) {
     quantity: 0,
     calories: 0,
     imageUrl: "",
-    user_id: props.sessionId,
+  
   };
 
   const sleepForm = {
     startTime: "",
     endTime: "",
-    user_id: props.sessionId,
+   
   };
 
   const exerciseForm = {
@@ -26,7 +26,7 @@ export default function GeneralForm(props) {
     category: "",
     duration: 0,
     intensity: 0,
-    user_id: props.sessionId,
+    
   };
 
   const [success, setSuccess] = useState(false);
@@ -150,41 +150,11 @@ export default function GeneralForm(props) {
       }, 3000);
       setIsLoading(false);
       resetForm();
-      //  props.setNutrition(data.nutritions);
-      //   apiClient.setToken(data.token);
+      
     }
     setIsLoading(false);
 
-    // try {
-    //   const res = await axios.post(
-    //     "http://localhost:3001/" + props.formType.toLowerCase() + "/create",
-    //     form
-    //   );
-
-    //   if (res?.data) {
-
-    //     setSuccess(true);
-    //     setTimeout(function () {
-    //       setSuccess(false);
-    //     }, 3000);
-    //     setIsLoading(false);
-    //     resetForm();
-    //   } else {
-    //     setErrors((e) => ({
-    //       ...e,
-    //       form: "Something went wrong with activity submission",
-    //     }));
-    //     setIsLoading(false);
-    //   }
-    // } catch (err) {
-    //   console.log(err);
-    //   const message = err?.response?.data?.error?.message;
-    //   setErrors((e) => ({
-    //     ...e,
-    //     form: message ? String(message) : String(err),
-    //   }));
-    //   setIsLoading(false);
-    // }
+   
   };
 
   if (props.formType === "Sleep") {

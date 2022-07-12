@@ -3,15 +3,7 @@ const { BadRequestError } = require("../utils/errors");
 
 
 class Nutrition {
-  static async getNutrition() {
-    const query = `SELECT * 
-                       FROM nutrition 
-                       JOIN users ON users.id = nutrition.user_id`;
-    const result = await db.query(query);
-    const nutrition = result.rows;
   
-    return nutrition;
-  }
 
   static async listNutritionForUser(user){
     const result = await db.query(
@@ -29,26 +21,6 @@ class Nutrition {
 
 
 
-  static async getNutrientById(id) {
-    const query = `SELECT * 
-                       FROM nutrition 
-                       JOIN users ON users.id = nutrition.user_id`;
-    const result = await db.query(query);
-    const nutrition = result.rows;
-  
-    return nutrition;
-  }
-
-  static async getNutritionById(id) {
-    const nutritions = await this.getNutrition();
-
-    const nutritionItems = nutritions.filter((datum) => {
-      
-      return datum.id === id;
-    });
-
-    return nutritionItems;
-  }
 
   static async postNutrition({nutritions, user}) {
     if (nutritions.nutrient.length === 0) {

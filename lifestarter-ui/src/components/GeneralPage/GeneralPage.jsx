@@ -26,9 +26,10 @@ export default function GeneralPage(props) {
   useEffect(() => {
     const getNutrition = async () => {
       const { data, error } = await apiClient.getNutrition();
+      console.log(data)
       if (data) {
         props.setNutrition(data.nutritions);
-        //   apiClient.setToken(data.token);
+       
       }
     };
 
@@ -37,7 +38,7 @@ export default function GeneralPage(props) {
 
       if (data) {
         props.setSleep(data.sleeps);
-        //     apiClient.setToken(data.token);
+       
       }
     };
 
@@ -46,7 +47,7 @@ export default function GeneralPage(props) {
 
       if (data) {
         props.setExercise(data.exercises);
-        //   apiClient.setToken(data.token);
+       
       }
     };
     getNutrition();
@@ -54,7 +55,7 @@ export default function GeneralPage(props) {
     getExercise();
   }, []);
 
-  //console.log(apiClient.token)
+  
 
   if (props.pageType === "Activity") {
     return (

@@ -35,27 +35,4 @@ router.post("/", security.requireAuthenticatedUser, async (req, res, next) => {
 
 
 
-// router.post("/create", async (req, res, next) => {
-//   try {
-//     const nutritions = req.body;
-
-
-//     const data = await Nutrition.postNutrition(nutritions);
-
-//     res.status(201).json({ nutrition: data });
-//   } catch (err) {
-//     next(err)
-//   }
-// });
-
-router.get("/:user_id", async (req, res, next) => {
-  const user_id = Number(req.params.user_id);
-  
-
-  const nutritions = await Nutrition.getNutritionById(user_id)
-  
-
-  res.status(200).json({ nutrition: nutritions });
-});
-
 module.exports = router;

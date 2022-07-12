@@ -35,27 +35,4 @@ router.post("/", security.requireAuthenticatedUser, async (req, res, next) => {
 
 
 
-// router.post("/create", async (req, res, next) => {
-//   try {
-//     const sleeps = req.body;
-
-
-//     const data = await Sleep.postSleep(sleeps);
-
-//     res.status(201).json({ sleep: data });
-//   } catch (err) {
-//     next(err)
-//   }
-// });
-
-router.get("/:user_id", async (req, res, next) => {
-  const user_id = Number(req.params.user_id);
-  
-
-  const sleeps = await Sleep.getSleepById(user_id)
-  
-
-  res.status(200).json({ sleep: sleeps });
-});
-
 module.exports = router;

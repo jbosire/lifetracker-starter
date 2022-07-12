@@ -14,7 +14,7 @@ import GeneralForm from "../GeneralForm/GeneralForm";
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [sessionId, setSessionId] = useState(null);
+  
   const [nutrition, setNutrition] = useState([]);
   const [sleep, setSleep] = useState([]);
   const [exercise, setExercise] = useState([]);
@@ -30,8 +30,7 @@ export default function App() {
           <Navbar
             isLoggedIn={isLoggedIn}
             setIsLoggedIn={setIsLoggedIn}
-            setSessionId={setSessionId}
-            sessionId={sessionId}
+            
             setIsClicked= {setIsClicked}
           />
           <Routes>
@@ -44,8 +43,7 @@ export default function App() {
                   name={name}
                   setName={setName}
                   pageType="Activity"
-                  setSessionId={setSessionId}
-                  sessionId={sessionId}
+                  
                   nutrition={nutrition}
                   setNutrition={setNutrition}
                   sleep={sleep}
@@ -61,7 +59,7 @@ export default function App() {
                 <GeneralPage
 
                   pageType="Exercise"
-                  sessionId={sessionId}
+                 
                   nutrition={nutrition}
                   setNutrition={setNutrition}
                   sleep={sleep}
@@ -76,7 +74,7 @@ export default function App() {
               element={
                 <GeneralPage
                   pageType="Nutrition"
-                  sessionId={sessionId}
+               
                   nutrition={nutrition}
                   setNutrition={setNutrition}
                   sleep={sleep}
@@ -91,7 +89,7 @@ export default function App() {
               element={
                 <GeneralPage
                   pageType="Sleep"
-                  sessionId={sessionId}
+             
                   nutrition={nutrition}
                   setNutrition={setNutrition}
                   sleep={sleep}
@@ -109,8 +107,7 @@ export default function App() {
                 setIsClicked= {setIsClicked}
                   isLoggedIn={isLoggedIn}
                   setIsLoggedIn={setIsLoggedIn}
-                  setSessionId={setSessionId}
-                  sessionId={sessionId}
+             
                   name={name}
                   setName={setName}
                 />
@@ -123,8 +120,7 @@ export default function App() {
                 setIsClicked= {setIsClicked}
                   isLoggedIn={isLoggedIn}
                   setIsLoggedIn={setIsLoggedIn}
-                  setSessionId={setSessionId}
-                  sessionId={sessionId}
+         
                   name={name}
                   setName={setName}
                 />
@@ -132,18 +128,18 @@ export default function App() {
             />
             <Route
               path="/sleep/create"
-              element={<GeneralForm formType="Sleep" sessionId={sessionId} />}
+              element={<GeneralForm formType="Sleep"  />}
             />
             <Route
               path="/nutrition/create"
               element={
-                <GeneralForm formType="Nutrition" sessionId={sessionId} />
+                <GeneralForm formType="Nutrition"  />
               }
             />
             <Route
               path="/exercise/create"
               element={
-                <GeneralForm formType="Exercise" sessionId={sessionId} />
+                <GeneralForm formType="Exercise"  />
               }
             />
 

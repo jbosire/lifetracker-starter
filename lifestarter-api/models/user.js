@@ -34,7 +34,7 @@ class User{
         }
 
         const user = await User.fetchUserByEmail(credentials.email)
-       // console.log(user)
+      
 
         if(user){
             const isValid = await bcrypt.compare(credentials.password, user.password);

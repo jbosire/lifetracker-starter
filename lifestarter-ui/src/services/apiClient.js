@@ -19,6 +19,8 @@ class ApiClient{
             "Content-Type" : "application/json"
         }
 
+        console.log(this.token)
+
         if(this.token){
             headers["Authorization"] = `Bearer ${this.token}`
         }
@@ -36,19 +38,19 @@ class ApiClient{
     }
 
 
-    async fetchUserFromToken(){
-        return await this.request({endpoint: `auth/me`, method: `GET`})
-    }
+    // async fetchUserFromToken(){
+    //     return await this.request({endpoint: `auth/me`, method: `GET`})
+    // }
 
 
-    async getProducts(){
-        return await this.request({endpoint: `store/`, method : `GET`})
+    async getNutrition(){
+        return await this.request({endpoint: `nutrition/`, method : `GET`})
     }
-    async getProducts(){
-        return await this.request({endpoint: `store/`, method : `GET`})
+    async getSleep(){
+        return await this.request({endpoint: `sleep/`, method : `GET`})
     }
-    async getProducts(){
-        return await this.request({endpoint: `store/`, method : `GET`})
+    async getExercise(){
+        return await this.request({endpoint: `exercise/`, method : `GET`})
     }
 
     

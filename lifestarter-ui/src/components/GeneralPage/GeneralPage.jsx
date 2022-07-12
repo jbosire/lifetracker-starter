@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import GeneralCard from "../GeneralCard/GeneralCard";
 
 import "./GeneralPage.css";
-import axios from "axios";
+
 import { useState, useEffect } from "react";
+import apiClient from "../../services/apiClient";
 
 export default function GeneralPage(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
 
   const emptyPage = (
     <div className="empty">
@@ -24,48 +24,37 @@ export default function GeneralPage(props) {
   );
 
   useEffect(() => {
-    //  props.setIsLoading(true);
-
     const getNutrition = async () => {
-      let nutritionUrl = `http://localhost:3001/nutrition/` + props.sessionId;
-
-      try {
-        let nutritionResponse = await axios.get(nutritionUrl);
-
-        let data = nutritionResponse.data.nutrition;
-        props.setNutrition(data);
-      } catch (e) {
-        console.log(e);
+      const { data, error } = await apiClient.getNutrition();
+      if (data) {
+        props.setNutrition(data.nutritions);
+        //   apiClient.setToken(data.token);
       }
     };
 
     const getSleep = async () => {
-      let sleepUrl = `http://localhost:3001/sleep/` + props.sessionId;
+      const { data, error } = await apiClient.getSleep();
 
-      try {
-        let sleepResponse = await axios.get(sleepUrl);
-        let data = sleepResponse.data.sleep;
-        props.setSleep(data);
-      } catch (e) {
-        console.log(e);
+      if (data) {
+        props.setSleep(data.sleeps);
+        //     apiClient.setToken(data.token);
       }
     };
 
     const getExercise = async () => {
-      let exerciseUrl = `http://localhost:3001/exercise/` + props.sessionId;
+      const { data, error } = await apiClient.getExercise();
 
-      try {
-        let exerciseResponse = await axios.get(exerciseUrl);
-        let data = exerciseResponse.data.exercise;
-        props.setExercise(data);
-      } catch (e) {
-        console.log(e);
+      if (data) {
+        props.setExercise(data.exercises);
+        //   apiClient.setToken(data.token);
       }
     };
     getNutrition();
     getSleep();
     getExercise();
   }, []);
+
+  //console.log(apiClient.token)
 
   if (props.pageType === "Activity") {
     return (

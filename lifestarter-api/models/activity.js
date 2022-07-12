@@ -19,7 +19,7 @@ class Activity {
                    FROM exercise
                             `;
     const result = await db.query(query);
-    console.log(result.rows)
+   
    // const exercise = result.rows;
 
    // return exercise;

@@ -43,11 +43,16 @@ export default function Login(props) {
       email: form.email,
       password: form.password,
     });
-    if (error) setErrors((e) => ({ ...e, form: error }));
+    if (error) {
+      setIsLoading(false);
+      setErrors((e) => ({ ...e, form: error }));
+      
+    }
+    console.log(data)
     if (data?.user) {
       props.setSessionId(data.user.id);
       props.setName(data.user.firstName);
-      console.log(data.user);
+     
 
       setIsLoading(false);
       props.setIsLoggedIn(true);
@@ -55,9 +60,6 @@ export default function Login(props) {
       navigate("/activity");
       apiClient.setToken(data.token);
     }
-
-   
-  
   };
 
   return (

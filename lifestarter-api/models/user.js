@@ -110,7 +110,7 @@ class User{
         const query = `SELECT * FROM users WHERE email = $1`
         const result = await db.query(query, [email.toLowerCase()])
         const user = result.rows[0]
-        console.log("from fetch" + user)
+       
         return user
     }
 

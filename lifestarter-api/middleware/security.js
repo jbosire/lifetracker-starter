@@ -20,7 +20,6 @@ const jwtFrom = ({headers}) => {
 const extractUserFromJwt = (req,res,next) =>{
     try{
         const token = jwtFrom(req)
-        console.log("this is", token)
         if(token){
             
             res.locals.user = jwt.verify(token, SECRET_KEY)
@@ -37,7 +36,7 @@ const extractUserFromJwt = (req,res,next) =>{
 const requireAuthenticatedUser = (req,res,next) =>{
     try{
         const {user} = res.locals
-        console.log("i am", res.locals)
+     
         if(!user?.email){
             throw new UnauthorizedError()
         }

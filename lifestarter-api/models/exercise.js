@@ -20,7 +20,7 @@ class Exercise {
 
       `, [user.id]
     )
-    console.log(result.rows)
+   
 
     return result.rows
 

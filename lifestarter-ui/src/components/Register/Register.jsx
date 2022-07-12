@@ -97,18 +97,20 @@ export default function Register(props) {
       lastName: form.lastName,
       username: form.username,
     });
-    if (error) setErrors((e) => ({ ...e, form: error }));
+    if (error) {
+      setErrors((e) => ({ ...e, form: error }));
+      setIsLoading(false);
+    }
     if (data?.user) {
       props.setSessionId(data.user.id);
       props.setName(data.user.firstName);
-      console.log(data.user);
+  
       props.setIsLoggedIn(true);
       props.setIsClicked(false);
       navigate("/activity");
       setIsLoading(false);
       apiClient.setToken(data.token);
     }
-
   };
 
   return (

@@ -12,6 +12,21 @@ class Sleep {
   }
 
 
+  static async listSleepForUser(user){
+    const result = await db.query(
+      ` SELECT * 
+        FROM sleep
+        WHERE user_id = $1;
+
+      `, [user.id]
+    )
+    
+
+    return result.rows
+
+  }
+
+
   static async getSleepById(id) {
     const sleeps = await this.getSleep();
 

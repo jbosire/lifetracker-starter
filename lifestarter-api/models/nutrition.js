@@ -13,6 +13,22 @@ class Nutrition {
     return nutrition;
   }
 
+  static async listNutritionForUser(user){
+    const result = await db.query(
+      ` SELECT * 
+        FROM nutrition
+        WHERE user_id = $1;
+
+      `, [user.id]
+    )
+   
+
+    return result.rows
+
+  }
+
+
+
   static async getNutrientById(id) {
     const query = `SELECT * 
                        FROM nutrition 

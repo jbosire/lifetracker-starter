@@ -19,7 +19,7 @@ class ApiClient{
             "Content-Type" : "application/json"
         }
 
-        console.log(this.token)
+     
 
         if(this.token){
             headers["Authorization"] = `Bearer ${this.token}`
@@ -53,7 +53,12 @@ class ApiClient{
         return await this.request({endpoint: `exercise/`, method : `GET`})
     }
 
-    
+
+    async createPost(data, point){
+        return await this.request({endpoint: point + `/`, method : `POST`, data: data})
+
+    }
+ 
 
     async loginUser(credentials){
         return await this.request({endpoint: `auth/login`, method: `POST`, data: credentials})

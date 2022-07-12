@@ -38,12 +38,12 @@ class Sleep {
   }
 
 
-  static async postSleep(sleep) {
-    if (sleep.startTime.length === 0) {
+  static async postSleep({sleeps,user}) {
+    if (sleeps.startTime.length === 0) {
       throw new BadRequestError("No start time provided");
     }
 
-    if (sleep.endTime.length === 0) {
+    if (sleeps.endTime.length === 0) {
       throw new BadRequestError("No end time provided");
     }
 
@@ -58,9 +58,9 @@ class Sleep {
         RETURNING user_id,startTime,endTime,user_id,createdAt;
         `,
       [
-        sleep.startTime,
-        sleep.endTime,
-        sleep.user_id,
+        sleeps.startTime,
+        sleeps.endTime,
+        user.id,
       ]
     );
 

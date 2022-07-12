@@ -2,7 +2,8 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import "./GeneralForm.css";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import apiClient from "../../services/apiClient";
+
 
 export default function GeneralForm(props) {
   const nutritionForm = {
@@ -122,7 +123,6 @@ export default function GeneralForm(props) {
       element.value = null;
     }
 
-
     props.formType === "Nutrition"
       ? setForm(nutritionForm)
       : props.formType === "Sleep"
@@ -133,37 +133,58 @@ export default function GeneralForm(props) {
   const handleOnSubmit = async () => {
     setIsLoading(true);
     setErrors((e) => ({ ...e, form: null }));
+    console.log(props.formType.toLowerCase())
 
-    try {
-      const res = await axios.post(
-        "http://localhost:3001/" + props.formType.toLowerCase() + "/create",
-        form
-      );
-
-      if (res?.data) { 
-
-        setSuccess(true);
-        setTimeout(function () {
-          setSuccess(false);
-        }, 3000);
-        setIsLoading(false);
-        resetForm();
-      } else {
-        setErrors((e) => ({
-          ...e,
-          form: "Something went wrong with activity submission",
-        }));
-        setIsLoading(false);
-      }
-    } catch (err) {
-      console.log(err);
-      const message = err?.response?.data?.error?.message;
-      setErrors((e) => ({
-        ...e,
-        form: message ? String(message) : String(err),
-      }));
+    const { data, error } = await apiClient.createPost(
+      form,
+      props.formType.toLowerCase()
+    );
+    if (error) {
       setIsLoading(false);
+      setErrors((e) => ({ ...e, form: error }));
     }
+    if (data) {
+      setSuccess(true);
+      setTimeout(function () {
+        setSuccess(false);
+      }, 3000);
+      setIsLoading(false);
+      resetForm();
+      //  props.setNutrition(data.nutritions);
+      //   apiClient.setToken(data.token);
+    }
+    setIsLoading(false);
+
+    // try {
+    //   const res = await axios.post(
+    //     "http://localhost:3001/" + props.formType.toLowerCase() + "/create",
+    //     form
+    //   );
+
+    //   if (res?.data) {
+
+    //     setSuccess(true);
+    //     setTimeout(function () {
+    //       setSuccess(false);
+    //     }, 3000);
+    //     setIsLoading(false);
+    //     resetForm();
+    //   } else {
+    //     setErrors((e) => ({
+    //       ...e,
+    //       form: "Something went wrong with activity submission",
+    //     }));
+    //     setIsLoading(false);
+    //   }
+    // } catch (err) {
+    //   console.log(err);
+    //   const message = err?.response?.data?.error?.message;
+    //   setErrors((e) => ({
+    //     ...e,
+    //     form: message ? String(message) : String(err),
+    //   }));
+    //   setIsLoading(false);
+    // }
   };
 
   if (props.formType === "Sleep") {

@@ -12,6 +12,8 @@ class Exercise {
     return exercise;
   }
 
+  
+
   static async listExerciseForUser(user){
     const result = await db.query(
       ` SELECT * 
@@ -36,20 +38,20 @@ class Exercise {
     return exerciseItems;
   }
 
-  static async postExercise(exercise) {
-    if (exercise.exercise.length === 0) {
+  static async postExercise({exercises, user}) {
+    if (exercises.exercise.length === 0) {
       throw new BadRequestError("No exercise name provided");
     }
 
-    if (exercise.category.length === 0) {
+    if (exercises.category.length === 0) {
       throw new BadRequestError("No exercise category provided");
     }
 
-    if (exercise.duration === 0) {
+    if (exercises.duration === 0) {
       throw new BadRequestError("Exercise duration cannot be zero");
     }
 
-    if (exercise.intensity === 0) {
+    if (exercises.intensity === 0) {
       throw new BadRequestError("Exercise intensity cannot be zero");
     }
 
@@ -66,11 +68,11 @@ class Exercise {
         RETURNING user_id,exercise,category,duration,intensity;
         `,
       [
-        exercise.exercise,
-        exercise.category,
-        exercise.duration,
-        exercise.intensity,
-        exercise.user_id,
+        exercises.exercise,
+        exercises.category,
+        exercises.duration,
+        exercises.intensity,
+        user.id,
       ]
     );
 

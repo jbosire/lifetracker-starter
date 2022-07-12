@@ -20,19 +20,33 @@ router.get("/",security.requireAuthenticatedUser ,async (req, res, next) => {
 
 
 
-
-router.post("/create", async (req, res, next) => {
+router.post("/", security.requireAuthenticatedUser, async (req, res, next) => {
   try {
-    const sleeps = req.body;
-
-
-    const data = await Sleep.postSleep(sleeps);
-
-    res.status(201).json({ sleep: data });
+    const {user} = res.locals
+   
+    
+    const sleeps = req.body; 
+    const sleep = await Sleep.postSleep({sleeps,user});
+    return res.status(200).json({ sleep: sleep });
   } catch (err) {
-    next(err)
+    next(err);
   }
 });
+
+
+
+// router.post("/create", async (req, res, next) => {
+//   try {
+//     const sleeps = req.body;
+
+
+//     const data = await Sleep.postSleep(sleeps);
+
+//     res.status(201).json({ sleep: data });
+//   } catch (err) {
+//     next(err)
+//   }
+// });
 
 router.get("/:user_id", async (req, res, next) => {
   const user_id = Number(req.params.user_id);

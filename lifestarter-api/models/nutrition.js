@@ -50,25 +50,25 @@ class Nutrition {
     return nutritionItems;
   }
 
-  static async postNutrition(nutrition) {
-    if (nutrition.nutrient.length === 0) {
+  static async postNutrition({nutritions, user}) {
+    if (nutritions.nutrient.length === 0) {
       throw new BadRequestError("No nutrient name provided");
     }
 
-    if (nutrition.category.length === 0) {
+    if (nutritions.category.length === 0) {
       throw new BadRequestError("No nutrition category provided");
     }
 
-    if (nutrition.imageUrl.length === 0) {
+    if (nutritions.imageUrl.length === 0) {
       throw new BadRequestError("Must provide imageUrl");
     }
 
-    if (nutrition.quantity === 0){
+    if (nutritions.quantity === 0){
       throw new BadRequestError("Nutrition quantity cannot be zero");
 
     }
 
-    if (nutrition.calories === 0){
+    if (nutritions.calories === 0){
       throw new BadRequestError("Nutrition calories cannot be zero");
       
     }
@@ -87,12 +87,12 @@ class Nutrition {
             RETURNING user_id,nutrient,category,quantity,calories;
             `,
       [
-        nutrition.nutrient,
-        nutrition.category,
-        nutrition.quantity,
-        nutrition.calories,
-        nutrition.imageUrl,
-        nutrition.user_id,
+        nutritions.nutrient,
+        nutritions.category,
+        nutritions.quantity,
+        nutritions.calories,
+        nutritions.imageUrl,
+        user.id,
       ]
     );
 

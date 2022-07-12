@@ -15,17 +15,29 @@ router.get("/",security.requireAuthenticatedUser ,async (req, res, next) => {
   }
 });
 
-router.post("/create", async (req, res, next) => {
+router.post("/", security.requireAuthenticatedUser, async (req, res, next) => {
   try {
-    const exercises = req.body;
-
-    const data = await Exercise.postExercise(exercises);
-
-    res.status(201).json({ exercise: data });
+    const {user} = res.locals
+    
+    const exercises = req.body; 
+    const exercise = await Exercise.postExercise({exercises,user});
+    return res.status(200).json({ exercise: exercise });
   } catch (err) {
     next(err);
   }
 });
+
+// router.post("/", security.requireAuthenticatedUser, async (req, res, next) => {
+//   try {
+//     const exercises = req.body;
+
+//     const data = await Exercise.postExercise(exercises);
+
+//     res.status(201).json({ exercise: data });
+//   } catch (err) {
+//     next(err);
+//   }
+// });
 
 router.get("/:user_id", async (req, res, next) => {
   const user_id = Number(req.params.user_id);

@@ -3,6 +3,7 @@ import "./LandingPage.css";
 
 
 export default function LandingPage() {
+  console.log(localStorage.getItem("lifestarter_token"))
     
   return (
     <div className="LandingPage">

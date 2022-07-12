@@ -10,6 +10,7 @@ import GeneralPage from "../GeneralPage/GeneralPage";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import GeneralForm from "../GeneralForm/GeneralForm";
+import apiClient from "../../services/apiClient";
 
 
 export default function App() {
@@ -20,6 +21,28 @@ export default function App() {
   const [exercise, setExercise] = useState([]);
   const [name, setName] = useState("");
   const [isClicked, setIsClicked] = useState(false);
+  const [user, setUser] = useState(null)
+
+
+
+  console.log(localStorage.getItem("lifestarter_token"))
+
+  
+  useEffect(() => {
+    const fetchAuthedUser = async () => {
+      const { data, error } = await apiClient.fetchUserFromToken();
+      if (data) setUser(data.user);
+     // if (error) setError(error);
+    };
+
+    const token = localStorage.getItem("lifestarter_token");
+  //  console.log(token)
+    if (token) {
+      apiClient.setToken(token);
+      fetchAuthedUser();
+    }
+  }, []);
+
 
   
   

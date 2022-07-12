@@ -26,7 +26,7 @@ export default function GeneralPage(props) {
   useEffect(() => {
     const getNutrition = async () => {
       const { data, error } = await apiClient.getNutrition();
-      console.log(data)
+      
       if (data) {
         props.setNutrition(data.nutritions);
        

@@ -38,9 +38,10 @@ class ApiClient{
     }
 
 
-    // async fetchUserFromToken(){
-    //     return await this.request({endpoint: `auth/me`, method: `GET`})
-    // }
+ 
+    async fetchUserFromToken(){
+        return await this.request({endpoint: `auth/me`, method: `GET`})
+    }
 
 
     async getNutrition(){

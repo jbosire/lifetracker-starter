@@ -6,7 +6,7 @@ export default function LandingPage() {
     
   return (
     <div className="LandingPage">
-      <div class="hero">
+      <div className="hero">
         <img src="http://codepath-lifetracker.surge.sh/static/media/smartwatch-screen-digital-device.e2983a85.svg" alt="hero img"></img>
         <h1>LIFE TRACKER</h1>
         <p>Eat Clean, Train Dirty</p>

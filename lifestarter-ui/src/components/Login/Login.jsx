@@ -1,7 +1,8 @@
 import * as React from "react";
 import "./Login.css";
-import {useState} from "react"
-import axios from "axios";
+import { useState } from "react";
+
+import apiClient from "../../services/apiClient";
 import { Navigate, useNavigate } from "react-router-dom";
 
 export default function Login(props) {
@@ -11,9 +12,7 @@ export default function Login(props) {
     email: "",
     password: "",
   });
-  const [isLoading,setIsLoading] = useState(false)
-
-
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleOnInputChange = (event) => {
     if (event.target.name === "email") {
@@ -24,81 +23,85 @@ export default function Login(props) {
       }
     }
 
-
-    if(event.target.name === "password"){
-      if(event.target.value.length < 1){
+    if (event.target.name === "password") {
+      if (event.target.value.length < 1) {
         setErrors((e) => ({ ...e, password: "Please enter a your password." }));
       } else {
         setErrors((e) => ({ ...e, password: null }));
-
       }
-
     }
 
     setForm((f) => ({ ...f, [event.target.name]: event.target.value }));
-  }
-
+  };
 
   const handleOnSubmit = async (e) => {
-    e.preventDefault()
-    setIsLoading(true)
-    setErrors((e) => ({ ...e, form: null }))
+    e.preventDefault();
+    setIsLoading(true);
+    setErrors((e) => ({ ...e, form: null }));
 
-    try {
-      const res = await axios.post(`http://localhost:3001/auth/login`, {
-        password: form.password,
-        email: form.email,
-      })
-      if (res?.data) {
-     
-       props.setSessionId(res.data.user.id)
-       props.setName(res.data.user.firstName)
-       console.log(res.data.user)
-       
-      
-        setIsLoading(false)
-        props.setIsLoggedIn(true)
-        props.setIsClicked(false)
-        navigate("/activity")
-      } else {
-        setErrors((e) => ({ ...e, form: "Invalid username/password combination" }))
-        setIsLoading(false)
-      }
-    } catch (err) {
-      console.log(err)
-      const message = err?.response?.data?.error?.message
-      setErrors((e) => ({ ...e, form: message ? String(message) : String(err) }))
-      setIsLoading(false)
+    const { data, error } = await apiClient.loginUser({
+      email: form.email,
+      password: form.password,
+    });
+    if (error) setErrors((e) => ({ ...e, form: error }));
+    if (data?.user) {
+      props.setSessionId(data.user.id);
+      props.setName(data.user.firstName);
+      console.log(data.user);
+
+      setIsLoading(false);
+      props.setIsLoggedIn(true);
+      props.setIsClicked(false);
+      navigate("/activity");
+      apiClient.setToken(data.token);
     }
-  }
+
+   
   
+  };
+
   return (
     <div className="Login">
       <div className="card">
-        {!props.isLoggedIn && props.isClicked ? <h1 className="logError">Must be logged in to view this page</h1> : null}
-        
+        {!props.isLoggedIn && props.isClicked ? (
+          <h1 className="logError">Must be logged in to view this page</h1>
+        ) : null}
+
         <h2>Login</h2>
-        <br/>
+        <br />
         <div className="form">
-        {errors.form && <span className="error">{errors.form}</span>}
+          {errors.form && <span className="error">{errors.form}</span>}
           <div className="input-field">
             <label for="email">Email</label>
-            <input type="email" name="email" placeholder="doe@joram.com" onChange={handleOnInputChange}/>
+            <input
+              type="email"
+              name="email"
+              placeholder="doe@joram.com"
+              onChange={handleOnInputChange}
+            />
             {errors.email && <span className="error">{errors.email}</span>}
           </div>
           <div className="input-field">
             <label for="password">Password</label>
-            <input type="password" name="password" placeholder="password" onChange={handleOnInputChange}/>
-            {errors.password && <span className="error">{errors.password}</span>}
+            <input
+              type="password"
+              name="password"
+              placeholder="password"
+              onChange={handleOnInputChange}
+            />
+            {errors.password && (
+              <span className="error">{errors.password}</span>
+            )}
           </div>
 
-          <button className="btn" onClick={handleOnSubmit}>{isLoading ? "Loading...." : "Log In"}</button>
+          <button className="btn" onClick={handleOnSubmit}>
+            {isLoading ? "Loading...." : "Log In"}
+          </button>
         </div>
         <div className="footer">
           <p>Not registered yet? Sign up {<a href="/register"> here.</a>}</p>
         </div>
       </div>
-     
     </div>
   );
 }

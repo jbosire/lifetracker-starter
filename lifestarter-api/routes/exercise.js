@@ -1,10 +1,12 @@
 const express = require("express");
 const Exercise = require("../models/exercise");
+const security = require("../middleware/security")
 const router = express.Router();
 
-router.get("/", async (req, res, next) => {
+router.get("/",security.requireAuthenticatedUser ,async (req, res, next) => {
   try {
-    const exercises = await Exercise.getExercise();
+    const {user} = res.locals
+    const exercises = await Exercise.listExerciseForUser(user)
     res.status(200).json({ exercises: exercises });
   } catch (err) {
     next(err);

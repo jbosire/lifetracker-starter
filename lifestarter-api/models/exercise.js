@@ -12,6 +12,20 @@ class Exercise {
     return exercise;
   }
 
+  static async listExerciseForUser(user){
+    const result = await db.query(
+      ` SELECT * 
+        FROM exercise
+        WHERE user_id = $1;
+
+      `, [user.id]
+    )
+    console.log(result.rows)
+
+    return result.rows
+
+  }
+
   static async getExercisesById(id) {
     const exercises = await this.getExercise();
 

@@ -8,11 +8,11 @@ import { useState, useEffect } from "react";
 
 export default function GeneralPage(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  
+
 
   const emptyPage = (
     <div className="empty">
-      <div class="hero">
+      <div className="hero">
         <img
           src="http://codepath-lifetracker.surge.sh/static/media/smartwatch-screen-digital-device.e2983a85.svg"
           alt="hero img"

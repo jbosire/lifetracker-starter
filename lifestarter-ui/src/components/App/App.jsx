@@ -10,7 +10,7 @@ import GeneralPage from "../GeneralPage/GeneralPage";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import GeneralForm from "../GeneralForm/GeneralForm";
-import axios from "axios";
+
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

@@ -1,7 +1,8 @@
 import * as React from "react";
 import "./Register.css";
 import { useState } from "react";
-import axios from "axios";
+import apiClient from "../../services/apiClient";
+
 import { Navigate, useNavigate } from "react-router-dom";
 
 export default function Register(props) {
@@ -89,44 +90,26 @@ export default function Register(props) {
       setErrors((e) => ({ ...e, passwordConfirm: null }));
     }
 
-    try {
-      const res = await axios.post("http://localhost:3001/auth/register", {
-        password: form.password,
-        firstName: form.firstName,
-        lastName: form.lastName,
-        email: form.email,
-        username: form.username,
-      });
-
-      if (res?.data?.user) {
-        
-        
-        props.setSessionId(res.data.user.id)
-        props.setName(res.data.user.firstName)
-        console.log(res.data.user)
-        props.setIsLoggedIn(true)
-        props.setIsClicked(false)
-        navigate("/activity");
-        setIsLoading(false);
-      } else {
-        setErrors((e) => ({
-          ...e,
-          form: "Something went wrong with registration",
-        }));
-        setIsLoading(false);
-      }
-    } catch (err) {
-      console.log(err);
-      const message = err?.response?.data?.error?.message;
-      setErrors((e) => ({
-        ...e,
-        form: message ? String(message) : String(err),
-      }));
+    const { data, error } = await apiClient.signupUser({
+      email: form.email,
+      password: form.password,
+      firstName: form.firstName,
+      lastName: form.lastName,
+      username: form.username,
+    });
+    if (error) setErrors((e) => ({ ...e, form: error }));
+    if (data?.user) {
+      props.setSessionId(data.user.id);
+      props.setName(data.user.firstName);
+      console.log(data.user);
+      props.setIsLoggedIn(true);
+      props.setIsClicked(false);
+      navigate("/activity");
       setIsLoading(false);
+      apiClient.setToken(data.token);
     }
-  };
 
-  
+  };
 
   return (
     <div className="Register">

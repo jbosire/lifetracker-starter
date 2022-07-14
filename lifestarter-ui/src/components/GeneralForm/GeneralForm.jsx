@@ -133,7 +133,7 @@ export default function GeneralForm(props) {
   const handleOnSubmit = async () => {
     setIsLoading(true);
     setErrors((e) => ({ ...e, form: null }));
-    console.log(props.formType.toLowerCase())
+    
 
     const { data, error } = await apiClient.createPost(
       form,

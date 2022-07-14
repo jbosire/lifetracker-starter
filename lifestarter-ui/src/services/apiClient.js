@@ -71,5 +71,5 @@ class ApiClient{
 }
 
 
-export default new ApiClient( "http://localhost:3001")
+export default new ApiClient( "https://lifestarter-jbosire.herokuapp.com")
 //export default new ApiClient(process.env.REACT_APP_REMOTE_HOST_URL || "http://localhost:3001")

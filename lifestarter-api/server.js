@@ -42,5 +42,5 @@ app.use((err,req,res,next) => {
 
 
 app.listen(PORT, () => {
-    console.log(`🚀Server running http://localhost:${PORT}`)
+    console.log(`🚀Server running https://lifestarter-jbosire.herokuapp.com`)
 })

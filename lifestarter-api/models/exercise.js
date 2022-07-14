@@ -23,11 +23,11 @@ class Exercise {
   
 
   static async postExercise({exercises, user}) {
-    if (exercises.exercise.length === 0) {
+    if (exercises.exercise.length > 0) {
       throw new BadRequestError("No exercise name provided");
     }
 
-    if (exercises.category.length === 0) {
+    if (exercises.category.length > 0) {
       throw new BadRequestError("No exercise category provided");
     }
 

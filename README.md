@@ -4,7 +4,7 @@
 
 Submitted by: **NAME**
 
-Deployed Application: [Lifetracker Deployed Site](ADD_LINK_HERE)
+Deployed Application: [Lifetracker Deployed Site](https://jorambosire-lifetracker.surge.sh/)
 
 ## Application Features
 

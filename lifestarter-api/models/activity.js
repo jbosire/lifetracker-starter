@@ -5,15 +5,23 @@ class Activity {
 
   static async getTotalSleep({user}){
     const result = await db.query(`
-    SELECT strftime('%H', startTime) - strftime('%H', endTime)
+    SELECT  SUM(endTime - startTime)
     FROM sleep
     WHERE user_id = $1
 
       `, [user.id]
     )
-    return result;
+
+   
+
+     const row = result.rows[0];
+    
+    const total = (row.sum.days * 24) + row.sum.hours
+    return total
     
   }
+
+  
 
   static async getCaloryAvg({user}) {
     
@@ -74,6 +82,7 @@ class Activity {
       caloryTot: await this.getTotalCalory({user}),
       durationTot: await this.getTotalDuration({user}),
       intensityAvg: await this.getAvgIntensity({user}),
+      totalSleep: await this.getTotalSleep({user})
     }
 
     return result;

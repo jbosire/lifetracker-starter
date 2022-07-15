@@ -130,13 +130,13 @@ export function ActivityCard(props) {
               {props.actCardType === "Exercise"
                 ? "Total exercise time"
                 : props.actCardType === "Sleep"
-                ? "Average rest time"
+                ? null
                 : "Average calory consumption"}
             </p>
             <span>{props.actCardType === "Exercise"
                 ? props.stats.durationTot
                 : props.actCardType === "Sleep"
-                ? " asleep"
+                ? null
                 : calAvg}</span>
           </div>
           <div className="CardStat">
@@ -148,7 +148,7 @@ export function ActivityCard(props) {
             <span>{props.actCardType === "Exercise"
                 ? intenseAvg
                 : props.actCardType === "Sleep"
-                ? " asleep"
+                ? props.stats.totalSleep
                 : props.stats.caloryTot}</span>
           </div>
         </div>

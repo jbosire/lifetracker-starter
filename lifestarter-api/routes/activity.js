@@ -11,7 +11,7 @@ router.get("/",security.requireAuthenticatedUser ,async (req, res, next) => {
     var {user} = res.locals
 
 
-  //  console.log(user)
+ 
     
     const stats = await Activity.getStats({user})
     res.status(200).json({ stats: stats });
@@ -21,19 +21,7 @@ router.get("/",security.requireAuthenticatedUser ,async (req, res, next) => {
 });
 
 
-router.get("/sleep",security.requireAuthenticatedUser ,async (req, res, next) => {
-  try {
-    var {user} = res.locals
 
-
-  //  console.log(user)
-    
-    const stats = await Activity.getTotalSleep({user})
-    res.status(200).json({ stats: stats });
-  } catch (err) {
-    next(err);
-  }
-});
 
 
 module.exports = router;

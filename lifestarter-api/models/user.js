@@ -4,7 +4,7 @@ const {BCRYPT_WORK_FACTOR} = require("../config")
 const {BadRequestError,UnauthorizedError} = require("../utils/errors")
 
 class User{
-    static async makePublicUser(user){
+    static makePublicUser(user){
         return{
             id: user.id,
             firstName: user.firstname,

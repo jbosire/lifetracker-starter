@@ -12,40 +12,49 @@ import Register from "../Register/Register";
 import GeneralForm from "../GeneralForm/GeneralForm";
 import apiClient from "../../services/apiClient";
 
-
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  
+
   const [nutrition, setNutrition] = useState([]);
   const [sleep, setSleep] = useState([]);
   const [exercise, setExercise] = useState([]);
   const [name, setName] = useState("");
   const [isClicked, setIsClicked] = useState(false);
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null);
+  const [stats, setStats] = useState({});
 
+  //console.log(localStorage.getItem("lifestarter_token"))
 
+  // useEffect(() => {
+  //   const fetchAuthedUser = async () => {
+  //     const { data, error } = await apiClient.fetchUserFromToken();
+  //     if (data) setUser(data.user);
+  //    // if (error) setError(error);
+  //   };
 
-  console.log(localStorage.getItem("lifestarter_token"))
+  //   const token = localStorage.getItem("lifestarter_token");
+  // //  console.log(token)
+  //   if (token) {
+  //     apiClient.setToken(token);
+  //     fetchAuthedUser();
+  //   }
+  // }, []);
 
-  
   useEffect(() => {
-    const fetchAuthedUser = async () => {
-      const { data, error } = await apiClient.fetchUserFromToken();
-      if (data) setUser(data.user);
-     // if (error) setError(error);
+    const getUser = async () => {
+      const token = localStorage.getItem("lifestarter_token");
+
+      if (token) {
+        apiClient.setToken(token);
+        const response = await apiClient.fetchUserFromToken();
+
+        console.log("what is this ", response);
+      }
     };
 
-    const token = localStorage.getItem("lifestarter_token");
-  //  console.log(token)
-    if (token) {
-      apiClient.setToken(token);
-      fetchAuthedUser();
-    }
+    getUser();
   }, []);
 
-
-  
-  
   return (
     <div className="app">
       <BrowserRouter>
@@ -53,8 +62,7 @@ export default function App() {
           <Navbar
             isLoggedIn={isLoggedIn}
             setIsLoggedIn={setIsLoggedIn}
-            
-            setIsClicked= {setIsClicked}
+            setIsClicked={setIsClicked}
           />
           <Routes>
             <Route path="/" element={<LandingPage />} />
@@ -62,11 +70,12 @@ export default function App() {
               path="/activity"
               element={
                 <GeneralPage
-                isClicked={isClicked}
+                  isClicked={isClicked}
                   name={name}
                   setName={setName}
                   pageType="Activity"
-                  
+                  stats={stats}
+                  setStats={setStats}
                   nutrition={nutrition}
                   setNutrition={setNutrition}
                   sleep={sleep}
@@ -80,15 +89,15 @@ export default function App() {
               path="/exercise"
               element={
                 <GeneralPage
-
                   pageType="Exercise"
-                 
                   nutrition={nutrition}
                   setNutrition={setNutrition}
                   sleep={sleep}
                   setSleep={setSleep}
                   exercise={exercise}
                   setExercise={setExercise}
+                  stats={stats}
+                  setStats={setStats}
                 />
               }
             />
@@ -97,13 +106,14 @@ export default function App() {
               element={
                 <GeneralPage
                   pageType="Nutrition"
-               
                   nutrition={nutrition}
                   setNutrition={setNutrition}
                   sleep={sleep}
                   setSleep={setSleep}
                   exercise={exercise}
                   setExercise={setExercise}
+                  stats={stats}
+                  setStats={setStats}
                 />
               }
             />
@@ -112,13 +122,14 @@ export default function App() {
               element={
                 <GeneralPage
                   pageType="Sleep"
-             
                   nutrition={nutrition}
                   setNutrition={setNutrition}
                   sleep={sleep}
                   setSleep={setSleep}
                   exercise={exercise}
                   setExercise={setExercise}
+                  stats={stats}
+                  setStats={setStats}
                 />
               }
             />
@@ -126,11 +137,10 @@ export default function App() {
               path="/login"
               element={
                 <Login
-                isClicked={isClicked}
-                setIsClicked= {setIsClicked}
+                  isClicked={isClicked}
+                  setIsClicked={setIsClicked}
                   isLoggedIn={isLoggedIn}
                   setIsLoggedIn={setIsLoggedIn}
-             
                   name={name}
                   setName={setName}
                 />
@@ -140,10 +150,9 @@ export default function App() {
               path="/register"
               element={
                 <Register
-                setIsClicked= {setIsClicked}
+                  setIsClicked={setIsClicked}
                   isLoggedIn={isLoggedIn}
                   setIsLoggedIn={setIsLoggedIn}
-         
                   name={name}
                   setName={setName}
                 />
@@ -151,19 +160,15 @@ export default function App() {
             />
             <Route
               path="/sleep/create"
-              element={<GeneralForm formType="Sleep"  />}
+              element={<GeneralForm formType="Sleep" />}
             />
             <Route
               path="/nutrition/create"
-              element={
-                <GeneralForm formType="Nutrition"  />
-              }
+              element={<GeneralForm formType="Nutrition" />}
             />
             <Route
               path="/exercise/create"
-              element={
-                <GeneralForm formType="Exercise"  />
-              }
+              element={<GeneralForm formType="Exercise" />}
             />
 
             <Route path="*" element={<NotFound />} />

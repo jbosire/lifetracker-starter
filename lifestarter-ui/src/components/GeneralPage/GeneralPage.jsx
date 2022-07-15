@@ -50,13 +50,24 @@ export default function GeneralPage(props) {
        
       }
     };
+
+    const getCalory = async () => {
+      const { data, error } = await apiClient.getStats();
+    //  console.log(data.stats)
+
+      if (data) {
+        props.setStats(data.stats);
+       
+      }
+    };
     getNutrition();
     getSleep();
     getExercise();
+    getCalory();
   }, []);
 
   
-
+console.log(props.stats)
   if (props.pageType === "Activity") {
     return (
       <div className="activity">
@@ -90,7 +101,7 @@ export default function GeneralPage(props) {
                 </div>
               </div>
               <div className="feed">
-                <GeneralCard cardType="Activity" />
+                <GeneralCard cardType="Activity" stats= {props.stats}/>
               </div>
             </div>
           </div>

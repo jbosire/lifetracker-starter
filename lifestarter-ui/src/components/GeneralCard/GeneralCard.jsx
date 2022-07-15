@@ -34,13 +34,14 @@ export default function GeneralCard(props) {
   }
 
   
+  
 
   if (props.cardType === "Activity") {
     return (
       <div className="cards">
-        <ActivityCard actCardType= "Nutrition"/>
-        <ActivityCard actCardType= "Sleep"/>
-        <ActivityCard actCardType= "Exercise"/>
+        <ActivityCard actCardType= "Nutrition" stats={props.stats}/>
+        <ActivityCard actCardType= "Sleep" stats={props.stats}/>
+        <ActivityCard actCardType= "Exercise" stats={props.stats}/>
       </div>
     );
   }
@@ -113,6 +114,10 @@ export default function GeneralCard(props) {
 }
 
 export function ActivityCard(props) {
+  
+  var calAvg = Math.round(props.stats.caloryAvg * 10) / 10 
+  var intenseAvg = Math.round(props.stats.intensityAvg * 10) / 10 
+  
   return (
     <div className={props.actCardType.toLowerCase() + "Card"}>
       <div className="GeneralCard">
@@ -129,10 +134,10 @@ export function ActivityCard(props) {
                 : "Average calory consumption"}
             </p>
             <span>{props.actCardType === "Exercise"
-                ? " intensity"
+                ? props.stats.durationTot
                 : props.actCardType === "Sleep"
                 ? " asleep"
-                : " calories"}</span>
+                : calAvg}</span>
           </div>
           <div className="CardStat">
             <p>{props.actCardType === "Exercise"
@@ -141,10 +146,10 @@ export function ActivityCard(props) {
                 ? "Total hours asleep"
                 : "Total calories"}</p>
             <span>{props.actCardType === "Exercise"
-                ? " intensity"
+                ? intenseAvg
                 : props.actCardType === "Sleep"
                 ? " asleep"
-                : " calories"}</span>
+                : props.stats.caloryTot}</span>
           </div>
         </div>
       </div>

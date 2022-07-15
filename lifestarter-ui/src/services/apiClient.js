@@ -59,6 +59,11 @@ class ApiClient{
         return await this.request({endpoint: point + `/`, method : `POST`, data: data})
 
     }
+
+    async getStats(){
+        return await this.request({endpoint: `activity/`, method : `GET`})
+
+    }
  
 
     async loginUser(credentials){
@@ -71,5 +76,5 @@ class ApiClient{
 }
 
 
-export default new ApiClient( "https://lifestarter-jbosire.herokuapp.com")
+export default new ApiClient( "http://localhost:3001")
 //export default new ApiClient(process.env.REACT_APP_REMOTE_HOST_URL || "http://localhost:3001")

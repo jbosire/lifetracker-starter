@@ -1,36 +1,39 @@
+
 const express = require("express");
 const Activity = require("../models/activity");
+const security = require("../middleware/security")
+const User = require("../models/user")
 const router = express.Router();
 
-router.get("/sleep", async (req, res, next) => {
+
+router.get("/",security.requireAuthenticatedUser ,async (req, res, next) => {
   try {
-    const sleeptotals = await Activity.getSleepAvg();
-    res.status(200).json({ sleephours: sleeptotals });
+    var {user} = res.locals
+
+
+  //  console.log(user)
+    
+    const stats = await Activity.getStats({user})
+    res.status(200).json({ stats: stats });
   } catch (err) {
     next(err);
   }
 });
 
-router.get("/exercise", async (req, res, next) => {
+
+router.get("/sleep",security.requireAuthenticatedUser ,async (req, res, next) => {
   try {
-    const exercisetotals = await Activity.getTotalExercise();
-    res.status(200).json({ exercisetotals: exercisetotals });
+    var {user} = res.locals
+
+
+  //  console.log(user)
+    
+    const stats = await Activity.getTotalSleep({user})
+    res.status(200).json({ stats: stats });
   } catch (err) {
     next(err);
   }
 });
 
-router.post("/create", async (req, res, next) => {
-  try {
-    const exercises = req.body;
-
-
-  //  const data = await Exercise.postExercise(exercises);
-
- //   res.status(201).json({ exercise: data });
-  } catch (err) {
-    next(err)
-  }
-});
 
 module.exports = router;

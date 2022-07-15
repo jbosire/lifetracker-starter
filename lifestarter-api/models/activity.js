@@ -2,31 +2,89 @@ const db = require("../db");
 const { BadRequestError } = require("../utils/errors");
 
 class Activity {
-  static async getSleepAvg() {
-    const query = `SELECT strftime('%H', 'now') - strftime('%H', '2004-01-01')
-                            FROM sleep
-                            JOIN users ON users.id = sleep.user_id`;
-    const result = await db.query(query);
-    const sleep = result.rows;
 
-    return sleep;
+  static async getTotalSleep({user}){
+    const result = await db.query(`
+    SELECT strftime('%H', startTime) - strftime('%H', endTime)
+    FROM sleep
+    WHERE user_id = $1
+
+      `, [user.id]
+    )
+    return result;
+    
   }
 
-  static async getCaloryAvg() {}
+  static async getCaloryAvg({user}) {
+    
+    const result = await db.query( `
+       SELECT AVG(calories) 
+       FROM nutrition
+       WHERE user_id = $1
+    
+    `, [user.id])
 
-  static async getTotalExercise() {
-    const query = `SELECT SUM(*)
-                   FROM exercise
-                            `;
-    const result = await db.query(query);
-   
-   // const exercise = result.rows;
-
-   // return exercise;
+    return result.rows[0].avg
 
   }
 
-  static async getAvgIntensity() {}
+  static async getTotalCalory({user}){
+    const result = await db.query( `
+       SELECT SUM(calories) 
+       FROM nutrition
+       WHERE user_id = $1
+    
+    `, [user.id])
+
+    return result.rows[0].sum
+
+  }
+
+
+  static async getTotalDuration({user}){
+    const result = await db.query( `
+       SELECT SUM(duration) 
+       FROM exercise
+       WHERE user_id = $1
+    
+    `, [user.id])
+
+    return result.rows[0].sum
+    
+  }
+
+  static async getAvgIntensity({user}){
+    const result = await db.query( `
+       SELECT AVG(intensity) 
+       FROM exercise
+       WHERE user_id = $1
+    
+    `, [user.id])
+
+    return result.rows[0].avg
+
+  }
+
+  
+
+  static async getStats({user}){
+  
+    var result = {
+      caloryAvg: await this.getCaloryAvg({user}),
+      caloryTot: await this.getTotalCalory({user}),
+      durationTot: await this.getTotalDuration({user}),
+      intensityAvg: await this.getAvgIntensity({user}),
+    }
+
+    return result;
+  }
+
+
+
+
+  
+
+  
 }
 
 module.exports = Activity;

@@ -18,7 +18,7 @@ Deployed Application: [Lifetracker Deployed Site](https://jorambosire-lifetracke
 - [x] **Login Page:** A form that allows users to login with email and password.
 - [x] **Registration Page:** A form that allows the user to sign up with their email, password, username, first name, and last name.
 - [x] When a user first authenticates, they should be redirected to an authenticated view (i.e the detailed activity page). When they sign out, all frontend data should be reset.
-- [ ] Users have access to an overview Activity page that show one summary statistic about each of the 3 types of activity tracked.
+- [x] Users have access to an overview Activity page that show one summary statistic about each of the 3 types of activity tracked.
 - [x] The API should have a `security` middleware that only allows authenticated users to access resources and only allows users to access resources about themselves. 
 - [x] Users should have the ability to track at least **1** types of activities (i.e Nutrition, Exercise, Sleep, etc.). Each activity should be tracked on separate pages.
 - [x] Deployed website with Heroku & Surge. 
@@ -47,15 +47,15 @@ Implement any of the following features to improve the application:
 
 * Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
 
-[Add your response here]
+[Yes they did help with developing the backend aspect of the project]
 
 * If you had more time, what would you have done differently? Would you have added additional features? Changed the way your project responded to a particular event, etc.
   
-[Add your response here]
+[I would've added the additional activity details page]
 
 * Reflect on your project demo, what went well? Were there things that maybe didn't go as planned? Did you notice something that your peer did that you would like to try next time?
 
-[Add your response here]
+[I realised that there are simpler ways to implement my UI, especially when dealing with similar components. Instead of repeating code, I found an easier way to incorporate everything into one file]
 
 ### Open-source libraries used
 
@@ -65,4 +65,4 @@ Implement any of the following features to improve the application:
 
 Give a shout out to somebody from your cohort that especially helped you during your project. This can be a fellow peer, instructor, TA, mentor, etc.
 
-[Add your response here]
+[Shoutout to Ammar Fakih and Moe Elias for all the help]

@@ -39,7 +39,10 @@ Implement any of the following features to improve the application:
 
 ### Walkthrough Video
 
-![Video link](https://www.loom.com/share/c1e04d1b0a194270a67be135cb87aeb9)
+![](https://media.giphy.com/media/QBVGs3mDvx0ST5dAJy/giphy.gif)
+![](https://media.giphy.com/media/Sr8PGS49E9MDVVhpPK/giphy.gif)
+![](https://media.giphy.com/media/5XHEwpNwKx7fw9Fdwz/giphy.gif)
+
 
 ### Reflection
 
